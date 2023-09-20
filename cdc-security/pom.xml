@@ -19,6 +19,13 @@
         <runOrder>alphabetical</runOrder>
         <project.root>${basedir}</project.root>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.auto.service</groupId>
+            <artifactId>auto-service</artifactId>
+            <version>${version.google.autoservice}</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>

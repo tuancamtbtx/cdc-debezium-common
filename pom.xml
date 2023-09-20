@@ -80,6 +80,9 @@
         <version.common.codec>1.13</version.common.codec>
         <version.kafka.connect>3.5.1</version.kafka.connect>
         <version.jmh>1.37</version.jmh>
+        <version.jsonpath>2.8.0</version.jsonpath>
+        <version.google.autoservice>1.0-rc5</version.google.autoservice>
+        <version.apicurio>2.4.7.Final</version.apicurio>
     </properties>
     <dependencyManagement>
         <dependencies>
