@@ -16,6 +16,8 @@
         <module>cdc-debezium-converter</module>
         <module>cdc-debezium-pipeline</module>
         <module>cdc-security</module>
+        <module>cdc-debezium-sinks</module>
+        <module>cdc-debezium-storage</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -83,6 +85,8 @@
         <version.jsonpath>2.8.0</version.jsonpath>
         <version.google.autoservice>1.0-rc5</version.google.autoservice>
         <version.apicurio>2.4.7.Final</version.apicurio>
+        <!-- Json Org -->
+        <version.json.org>20230618</version.json.org>
     </properties>
     <dependencyManagement>
         <dependencies>

@@ -162,6 +162,11 @@
             <artifactId>cdc-security</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${version.json.org}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
