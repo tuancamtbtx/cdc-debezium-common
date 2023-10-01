@@ -27,3 +27,6 @@ run MainApp.java
 
 ### 2. Setup Debezium Server
 Follow via https://debezium.io/documentation/reference/stable/operations/debezium-server.html
+
+### Architecture
+![alt text](./images/cdc_debezium_server.gif)
