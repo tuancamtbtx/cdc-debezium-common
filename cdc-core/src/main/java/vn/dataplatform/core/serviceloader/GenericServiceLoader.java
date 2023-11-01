@@ -1,13 +1,11 @@
-package vn.dataplatform.security.loader;
-
-import vn.dataplatform.security.utils.ServiceLoaderUtils;
+package vn.dataplatform.core.serviceloader;
 
 import java.util.List;
 
 /**
  * @author tuan.nguyen3
  */
-public class GenericServiceLoader<T> {
+public abstract class GenericServiceLoader<T> {
     Class<T> clazz;
 
     public GenericServiceLoader(Class<T> clazz) {

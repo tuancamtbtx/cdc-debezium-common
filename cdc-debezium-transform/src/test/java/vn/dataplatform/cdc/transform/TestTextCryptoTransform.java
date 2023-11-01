@@ -23,12 +23,12 @@ public class TestTextCryptoTransform {
     public static void setup() {
         props.put("type", "vn.dataplatform.cdc.transform.EncryptTransformer");
         props.put("fields", "contacts, code,bank_account.id, bank_account.info.email,info_str.fullName, info_str.company_info.phones");
-        props.put("contacts.provider", "com.ts.datalake.security.provider.crypto.TinkDaeadEncryptorProvider");
-        props.put("code.provider", "com.ts.datalake.security.provider.crypto.TinkDaeadEncryptorProvider");
-        props.put("bank_account.id.provider", "com.ts.datalake.security.provider.crypto.TinkDaeadEncryptorProvider");
-        props.put("bank_account.info.email.provider", "com.ts.datalake.security.provider.crypto.TinkDaeadEncryptorProvider");
-        props.put("info_str.fullName.provider", "com.ts.datalake.security.provider.crypto.TinkDaeadEncryptorProvider");
-        props.put("info_str.company_info.phones.provider", "com.ts.datalake.security.provider.crypto.TinkDaeadEncryptorProvider");
+        props.put("contacts.provider", "vn.dataplatform.security.provider.CryptoProvider");
+        props.put("code.provider", "vn.dataplatform.security.provider.CryptoProvider");
+        props.put("bank_account.id.provider", "vn.dataplatform.security.provider.CryptoProvider");
+        props.put("bank_account.info.email.provider", "vn.dataplatform.security.provider.CryptoProvider");
+        props.put("info_str.fullName.provider", "vn.dataplatform.security.provider.CryptoProvider");
+        props.put("info_str.company_info.phones.provider", "vn.dataplatform.security.provider.CryptoProvider");
 
     }
 

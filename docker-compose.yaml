@@ -8,16 +8,3 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-  apicurio:
-    image: apicurio/apicurio-registry-mem:2.4.7.Final
-    container_name: apicurio
-    ports:
-      - 8082:8080
-  lensesio:
-    image: lensesio/box
-    ports:
-      - 3030:3030
-      - 9092:9092
-    environment:
-      # please update the license key below (id=your token)
-      EULA: https://licenses.lenses.io/download/lensesdl?id=3285d724-46ef-11ee-8f1e-42010af01003

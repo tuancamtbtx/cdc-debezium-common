@@ -1,10 +1,14 @@
-package vn.dataplatform.cdc.transform;
+package vn.dataplatform.cdc.utils;
 
 import com.jayway.jsonpath.JsonPath;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import java.util.*;
 
 /**
  * @author tuan.nguyen3

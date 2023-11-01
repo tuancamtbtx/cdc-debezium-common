@@ -1,8 +1,15 @@
 package vn.dataplatform.cdc.transform;
 
+import static org.apache.kafka.connect.transforms.util.Requirements.requireMap;
+import static org.apache.kafka.connect.transforms.util.Requirements.requireStruct;
+
 import com.jayway.jsonpath.JsonPath;
-import io.debezium.DebeziumException;
 import io.debezium.config.Configuration;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import org.apache.kafka.common.cache.Cache;
 import org.apache.kafka.common.cache.LRUCache;
 import org.apache.kafka.common.cache.SynchronizedCache;
@@ -16,32 +23,24 @@ import org.apache.kafka.connect.transforms.Transformation;
 import org.apache.kafka.connect.transforms.util.SchemaUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vn.dataplatform.security.factory.CryptoFactory;
-import vn.dataplatform.security.spi.TextCrypto;
-
-import java.util.*;
-
-import static org.apache.kafka.connect.transforms.util.Requirements.requireMap;
-import static org.apache.kafka.connect.transforms.util.Requirements.requireStruct;
+import vn.dataplatform.cdc.utils.TransformUtils;
 
 /**
  * @author tuan.nguyen3
  */
-public abstract class Crypto<R extends ConnectRecord<R>> implements Transformation<R> {
+public abstract class AbstractTransform<R extends ConnectRecord<R>> implements Transformation<R> {
 
-    public static final ConfigDef CONFIG_DEF = new ConfigDef()
-            .define(TransformConfig.FIELD_FOR_CRYPTO, ConfigDef.Type.STRING, ConfigDef.Importance.HIGH, "Field name for list field name need to encrypt");
+    public static final ConfigDef CONFIG_DEF =
+        new ConfigDef().define(TransformConfig.FIELD_FOR_CRYPTO, ConfigDef.Type.STRING, ConfigDef.Importance.HIGH,
+            "Field name for list field name need to encrypt");
     protected static final String PURPOSE = "adding crypto to record";
     private static final io.debezium.config.Field FIELD_FOR_CRYPTO;
-    private final static Logger log = LoggerFactory.getLogger(Crypto.class);
+    private final static Logger log = LoggerFactory.getLogger(AbstractTransform.class);
 
     static {
-        FIELD_FOR_CRYPTO = io.debezium.config.Field.create("fields")
-                .withDisplayName("Field for crypto")
-                .withType(ConfigDef.Type.STRING)
-                .withWidth(ConfigDef.Width.MEDIUM)
-                .withImportance(ConfigDef.Importance.HIGH)
-                .withDescription("Field name for list field name need to encrypt/decrypt");
+        FIELD_FOR_CRYPTO = io.debezium.config.Field.create("fields").withDisplayName("Field for crypto").withType(ConfigDef.Type.STRING)
+            .withWidth(ConfigDef.Width.MEDIUM).withImportance(ConfigDef.Importance.HIGH)
+            .withDescription("Field name for list field name need to encrypt/decrypt");
     }
 
     protected String encryptedFields;
@@ -49,21 +48,11 @@ public abstract class Crypto<R extends ConnectRecord<R>> implements Transformati
     protected Configuration config;
 
     protected Optional<String> getCryptoProvider(String field) {
-        String classProvider = this.config.getString(
-                getFieldForCryptoProvider(field + "." + TransformConfig.PROVIDER_FOR_CRYPTO)
-        );
+        String classProvider = this.config.getString(getFieldForCryptoProvider(field + "." + TransformConfig.PROVIDER_FOR_CRYPTO));
         if (TransformUtils.isNotEmpty(classProvider)) {
             return Optional.of(classProvider.replaceAll("\\s", ""));
         }
         return Optional.empty();
-    }
-
-    protected TextCrypto getEncryptor(String name) {
-        try {
-            return CryptoFactory.getCrypto(name);
-        } catch (Exception ex) {
-            throw new DebeziumException("Error while instantiating text encryptor '" + name + "'", ex);
-        }
     }
 
     protected Object encryptByDataType(String providerClass, Object value) throws Exception {
@@ -82,12 +71,9 @@ public abstract class Crypto<R extends ConnectRecord<R>> implements Transformati
     }
 
     private io.debezium.config.Field getFieldForCryptoProvider(String name) {
-        return io.debezium.config.Field.create(name)
-                .withDisplayName("Field for crypto provider name")
-                .withType(ConfigDef.Type.STRING)
-                .withWidth(ConfigDef.Width.MEDIUM)
-                .withImportance(ConfigDef.Importance.HIGH)
-                .withDescription("Field name for crypto provider to encrypt/decrypt");
+        return io.debezium.config.Field.create(name).withDisplayName("Field for crypto provider name").withType(ConfigDef.Type.STRING)
+            .withWidth(ConfigDef.Width.MEDIUM).withImportance(ConfigDef.Importance.HIGH)
+            .withDescription("Field name for crypto provider to encrypt/decrypt");
     }
 
     @Override
@@ -201,11 +187,11 @@ public abstract class Crypto<R extends ConnectRecord<R>> implements Transformati
     private R applyWithSchema(R record) {
         final Struct value = requireStruct(operatingValue(record), PURPOSE); // check value in record is struct - not struct right is throw exception
         List<String> fields = TransformUtils.getFields(this.encryptedFields);
-        if (fields.isEmpty()) { // encrypted fields is empty so we don't need to process
+        if (fields.isEmpty()) { // encrypted fields is empty, so we don't need to process
             return record;
         }
         Schema updatedSchema = schemaUpdateCache.get(value.schema());
-        if(updatedSchema == null) {
+        if (updatedSchema == null) {
             updatedSchema = makeUpdateSchema(value.schema(), fields);
             schemaUpdateCache.put(value.schema(), updatedSchema);
         }
@@ -245,8 +231,7 @@ public abstract class Crypto<R extends ConnectRecord<R>> implements Transformati
                  */
                 if (field.schema().type() == Schema.Type.ARRAY) {
                     builder.field(field.name(), SchemaBuilder.array(Schema.OPTIONAL_STRING_SCHEMA).optional().build());
-                }
-                else {
+                } else {
                     builder.field(field.name(), Schema.STRING_SCHEMA);
                 }
             } else {

@@ -2,14 +2,20 @@ package vn.dataplatform.cdc.transform;
 
 import org.apache.kafka.connect.connector.ConnectRecord;
 import org.apache.kafka.connect.data.Schema;
+import vn.dataplatform.security.spi.TextCrypto;
 
 /**
  * @author tuan.nguyen3
  */
-public abstract class Encrypt<R extends ConnectRecord<R>> extends Crypto<R> {
+public abstract class Encrypt<R extends ConnectRecord<R>> extends AbstractTransform<R> {
     @Override
     protected String crypto(String providerClass, String text) throws Exception {
-        return this.getEncryptor(providerClass).encrypt(text);
+        try {
+            return TextCrypto.getInstance(providerClass).encrypt(text);
+
+        } catch (Exception ex) {
+            return text;
+        }
     }
 
     public static class Key<R extends ConnectRecord<R>> extends Encrypt<R> {
