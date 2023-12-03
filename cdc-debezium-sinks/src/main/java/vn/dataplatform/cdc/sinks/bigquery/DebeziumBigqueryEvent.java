@@ -1,0 +1,314 @@
+package vn.dataplatform.cdc.sinks.bigquery;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.cloud.bigquery.Clustering;
+import com.google.cloud.bigquery.Field;
+import com.google.cloud.bigquery.FieldList;
+import com.google.cloud.bigquery.LegacySQLTypeName;
+import com.google.cloud.bigquery.PrimaryKey;
+import com.google.cloud.bigquery.Schema;
+import com.google.cloud.bigquery.StandardSQLTypeName;
+import com.google.cloud.bigquery.TableConstraints;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import org.json.JSONObject;
+
+/**
+ * @author tuan.nguyen3
+ */
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.cloud.bigquery.*;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class DebeziumBigqueryEvent {
+  protected static final Logger LOGGER = LoggerFactory.getLogger(DebeziumBigqueryEvent.class);
+  public static final List<String> TS_MS_FIELDS = List.of("__ts_ms", "__source_ts_ms");
+  public static final List<String> BOOLEAN_FIELDS = List.of("__deleted");
+  protected static final ObjectMapper mapper = new ObjectMapper();
+
+  protected final String destination;
+  protected final JsonNode value;
+  protected final JsonNode key;
+  protected final JsonNode valueSchema;
+  protected final JsonNode keySchema;
+
+  public DebeziumBigqueryEvent(String destination, JsonNode value, JsonNode key, JsonNode valueSchema, JsonNode keySchema) {
+    this.destination = destination;
+    // @TODO process values. ts_ms values etc...
+    // TODO add field if exists backward compatible!
+    this.value = value;
+    this.key = key;
+    this.valueSchema = valueSchema;
+    this.keySchema = keySchema;
+  }
+
+  private static ArrayList<Field> getBigQuerySchemaFields(JsonNode schemaNode, Boolean binaryAsString,
+      boolean isStream) {
+
+    ArrayList<Field> fields = new ArrayList<>();
+
+    if (schemaNode == null) {
+      return fields;
+    }
+
+    String schemaType = schemaNode.get("type").textValue();
+    String schemaName = "root";
+    if (schemaNode.has("field")) {
+      schemaName = schemaNode.get("field").textValue();
+    }
+    LOGGER.trace("Converting Schema of: {}::{}", schemaName, schemaType);
+
+    for (JsonNode jsonSchemaFieldNode : schemaNode.get("fields")) {
+      String fieldName = jsonSchemaFieldNode.get("field").textValue();
+      String fieldType = jsonSchemaFieldNode.get("type").textValue();
+      String fieldSemanticType = "NO-SEMANTIC-TYPE";
+      if (jsonSchemaFieldNode.has("name")) {
+        fieldSemanticType = jsonSchemaFieldNode.get("name").textValue();
+      }
+      LOGGER.trace("Converting field: {}.{}::{}", schemaName, fieldName, fieldType);
+      // for all the debezium data types please see org.apache.kafka.connect.data.Schema;
+      switch (fieldType) {
+        case "struct":
+          // recursive call for nested fields
+          ArrayList<Field> subFields = getBigQuerySchemaFields(jsonSchemaFieldNode, binaryAsString, isStream);
+          fields.add(Field.newBuilder(fieldName, StandardSQLTypeName.STRUCT, FieldList.of(subFields)).build());
+          break;
+        default:
+          // default to String type
+          fields.add(getPrimitiveField(fieldType, fieldName, fieldSemanticType, binaryAsString, isStream));
+          break;
+      }
+    }
+
+    return fields;
+  }
+
+  private static Field getPrimitiveField(String fieldType, String fieldName, String fieldSemanticType, boolean binaryAsString, boolean isStream) {
+    switch (fieldType) {
+      case "int8":
+      case "int16":
+      case "int32":
+      case "int64":
+        if (TS_MS_FIELDS.contains(fieldName)) {
+          return Field.of(fieldName, StandardSQLTypeName.TIMESTAMP);
+        }
+        switch (fieldSemanticType) {
+          case "io.debezium.time.Date":
+            return Field.of(fieldName, StandardSQLTypeName.DATE);
+          case "io.debezium.time.Timestamp":
+            // NOTE automatic conversion not supported by batch load! it expects string datetime value!
+            // Caused by: io.grpc.StatusRuntimeException: INVALID_ARGUMENT:
+            // Cannot return an invalid datetime value of 1562639337000 microseconds relative to the Unix epoch.
+            // The range of valid datetime values is [0001-01-01 00:00:00, 9999-12-31 23:59:59.999999] on field c_timestamp0.
+            return Field.of(fieldName, StandardSQLTypeName.INT64);
+          case "io.debezium.time.MicroTimestamp":
+            // NOTE automatic conversion not supported by batch load! it expects string datetime value!
+            return Field.of(fieldName, StandardSQLTypeName.INT64);
+          case "io.debezium.time.NanoTimestamp":
+            // NOTE automatic conversion not supported by batch load! it expects string datetime value!
+            return Field.of(fieldName, StandardSQLTypeName.INT64);
+          default:
+            return Field.of(fieldName, StandardSQLTypeName.INT64);
+        }
+      case "float8":
+      case "float16":
+      case "float32":
+      case "float64":
+        return Field.of(fieldName, StandardSQLTypeName.FLOAT64);
+      case "double":
+        return Field.of(fieldName, StandardSQLTypeName.FLOAT64);
+      case "boolean":
+        return Field.of(fieldName, StandardSQLTypeName.BOOL);
+      case "string":
+        if (BOOLEAN_FIELDS.contains(fieldName)) {
+          return Field.of(fieldName, StandardSQLTypeName.BOOL);
+        }
+        switch (fieldSemanticType) {
+          case "io.debezium.time.ISODate":
+            return Field.of(fieldName, StandardSQLTypeName.DATE);
+          case "io.debezium.time.ISODateTime":
+            return Field.of(fieldName, StandardSQLTypeName.DATETIME);
+          case "io.debezium.time.ISOTime":
+            return Field.of(fieldName, StandardSQLTypeName.TIME);
+          case "io.debezium.data.Json":
+            return Field.of(fieldName, StandardSQLTypeName.JSON);
+          case "io.debezium.time.ZonedTimestamp":
+            return Field.of(fieldName, StandardSQLTypeName.TIMESTAMP);
+          case "io.debezium.time.ZonedTime":
+            // Invalid time string "12:05:11Z" Field: c_time; Value: 12:05:11Z
+            return Field.of(fieldName, StandardSQLTypeName.STRING);
+          default:
+            return Field.of(fieldName, StandardSQLTypeName.STRING);
+        }
+      case "bytes":
+        if (binaryAsString) {
+          return Field.of(fieldName, StandardSQLTypeName.STRING);
+        } else {
+          return Field.of(fieldName, StandardSQLTypeName.BYTES);
+        }
+      case "array":
+        return Field.of(fieldName, StandardSQLTypeName.ARRAY);
+      case "map":
+        return Field.of(fieldName, StandardSQLTypeName.STRUCT);
+      default:
+        // default to String type
+        return Field.of(fieldName, StandardSQLTypeName.STRING);
+    }
+
+  }
+
+  public ArrayList<String> keyFields() {
+
+    ArrayList<String> keyFields = new ArrayList<>();
+    for (JsonNode jsonSchemaFieldNode : this.keySchema().get("fields")) {
+      keyFields.add(jsonSchemaFieldNode.get("field").textValue());
+    }
+
+    return keyFields;
+  }
+
+  public String destination() {
+    return destination;
+  }
+
+  public JsonNode value() {
+    return value;
+  }
+
+  public String valueAsJsonLine(Schema schema) throws JsonProcessingException {
+
+    if (value == null) {
+      return null;
+    }
+
+    // process JSON fields
+    if (schema != null) {
+      for (Field f : schema.getFields()) {
+        if (f.getType() == LegacySQLTypeName.JSON && value.has(f.getName())) {
+          ((ObjectNode) value).replace(f.getName(), mapper.readTree(value.get(f.getName()).asText("{}")));
+        }
+        // process DATE values
+        if (f.getType() == LegacySQLTypeName.DATE && value.has(f.getName()) && !value.get(f.getName()).isNull()) {
+          ((ObjectNode) value).put(f.getName(), LocalDate.ofEpochDay(value.get(f.getName()).longValue()).toString());
+        }
+      }
+    }
+
+    // Process DEBEZIUM TS_MS values
+    TS_MS_FIELDS.forEach(tsf -> {
+      if (value.has(tsf)) {
+        ((ObjectNode) value).put(tsf, Instant.ofEpochMilli(value.get(tsf).longValue()).toString());
+      }
+    });
+
+    // Process DEBEZIUM BOOLEAN values
+    BOOLEAN_FIELDS.forEach(bf -> {
+      if (value.has(bf)) {
+        ((ObjectNode) value).put(bf, Boolean.valueOf(value.get(bf).asText()));
+      }
+    });
+
+    return mapper.writeValueAsString(value);
+  }
+
+  /**
+   * See https://cloud.google.com/bigquery/docs/write-api#data_type_conversions
+   *
+   * @return
+   */
+  public JSONObject valueAsJSONObject(boolean upsert, boolean upsertKeepDeletes) {
+    Map<String, Object> jsonMap = mapper.convertValue(value, new TypeReference<>() {
+    });
+    // SET UPSERT meta field `_CHANGE_TYPE`
+    if (upsert) {
+      // if its deleted row and upsertKeepDeletes = false, deleted records are deleted from target table
+      if (!upsertKeepDeletes && jsonMap.get("__op").equals("d")) {
+        jsonMap.put("_CHANGE_TYPE", "DELETE");
+      } else {
+        // if it's not deleted row or upsertKeepDeletes = true then add deleted record to target table
+        jsonMap.put("_CHANGE_TYPE", "UPSERT");
+      }
+    }
+
+    TS_MS_FIELDS.forEach(tsf -> {
+      if (jsonMap.containsKey(tsf)) {
+        // Convert millisecond to microseconds
+        jsonMap.replace(tsf, ((Long) jsonMap.get(tsf) * 1000L));
+      }
+    });
+
+    BOOLEAN_FIELDS.forEach(bf -> {
+      if (jsonMap.containsKey(bf)) {
+        jsonMap.replace(bf, Boolean.valueOf((String) jsonMap.get(bf)));
+      }
+    });
+
+    return new JSONObject(jsonMap);
+  }
+
+  public JsonNode key() {
+    return key;
+  }
+
+  public JsonNode valueSchema() {
+    return valueSchema;
+  }
+
+  public JsonNode keySchema() {
+    return keySchema;
+  }
+
+
+  public TableConstraints getBigQueryTableConstraints() {
+    return
+        TableConstraints.newBuilder()
+            .setPrimaryKey(PrimaryKey.newBuilder().setColumns(this.keyFields()).build())
+            .build();
+  }
+
+  public Clustering getBigQueryClustering(String clusteringField) {
+    // special destinations like "heartbeat.topics"
+    if (this.destination().startsWith("__debezium")) {
+      return Clustering.newBuilder().build();
+    }
+
+    if (this.keySchema() == null) {
+      return Clustering.newBuilder().setFields(List.of(clusteringField)).build();
+    } else {
+      ArrayList<String> keyFields = this.keyFields();
+      // NOTE Limit clustering fields to 4. it's the limit of Bigquery
+      List<String> clusteringFields = keyFields.stream().limit(3).collect(Collectors.toList());
+      clusteringFields.add(clusteringField);
+      return Clustering.newBuilder().setFields(clusteringFields).build();
+    }
+  }
+
+  public Schema getBigQuerySchema(Boolean binaryAsString, boolean isStream) {
+    ArrayList<Field> fields = getBigQuerySchemaFields(this.valueSchema(), binaryAsString, isStream);
+
+    if (fields.isEmpty()) {
+      return null;
+    }
+
+    return Schema.of(fields);
+  }
+
+}

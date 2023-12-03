@@ -18,6 +18,8 @@
         <module>cdc-security</module>
         <module>cdc-debezium-sinks</module>
         <module>cdc-debezium-storage</module>
+        <module>cdc-engine</module>
+        <module>cdc-debezium-dist</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
