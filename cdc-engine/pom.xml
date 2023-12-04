@@ -11,7 +11,13 @@
 
     <groupId>org.example</groupId>
     <artifactId>cdc-engine</artifactId>
-
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/tuancamtbtx/cdc-engine</url>
+        </repository>
+    </distributionManagement>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>

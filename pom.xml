@@ -8,6 +8,13 @@
     <artifactId>cdc-debezium-common</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/tuancamtbtx/cdc-debezium-common</url>
+        </repository>
+    </distributionManagement>
     <modules>
         <module>cdc-debezium-transform</module>
         <module>cdc-debezium-server</module>
