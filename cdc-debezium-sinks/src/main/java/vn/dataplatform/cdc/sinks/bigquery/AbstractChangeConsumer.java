@@ -107,13 +107,9 @@ public abstract class AbstractChangeConsumer extends BaseChangeConsumer implemen
         for (Map.Entry<String, List<DebeziumBigqueryEvent>> destinationEvents : events.entrySet()) {
             // group list of events by their schema, if in the batch we have schema change events grouped by their schema
             // so with this uniform schema is guaranteed for each batch
-//            if(destinationEvents.getValue() != null) {
-//                destinationEvents.getValue().forEach(e -> LOGGER.info("Event '{}'", e.valueSchema));
-//                LOGGER.info("Destination {} got {} records", destinationEvents.getKey(), destinationEvents.getValue().size());
-//                return ;
-//            }
             Map<JsonNode, List<DebeziumBigqueryEvent>> eventsGroupedBySchema =
                 destinationEvents.getValue().stream()
+                    .filter(e -> e.valueSchema() != null)
                     .collect(Collectors.groupingBy(DebeziumBigqueryEvent::valueSchema));
             LOGGER.debug("Destination {} got {} records with {} different schema!!", destinationEvents.getKey(),
                 destinationEvents.getValue().size(),

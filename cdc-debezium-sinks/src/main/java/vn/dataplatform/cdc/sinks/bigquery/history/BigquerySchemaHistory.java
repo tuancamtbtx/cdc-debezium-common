@@ -31,6 +31,7 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vn.dataplatform.cdc.sinks.bigquery.BatchUtil;
@@ -58,6 +59,7 @@ public class BigquerySchemaHistory extends AbstractSchemaHistory {
   private final AtomicBoolean running = new AtomicBoolean();
   BigquerySchemaHistoryConfig historyConfig;
   BigQuery bqClient;
+  @Getter
   private String tableFullName;
   private TableId tableId;
 
@@ -99,10 +101,6 @@ public class BigquerySchemaHistory extends AbstractSchemaHistory {
         }
       }
     });
-  }
-
-  public String getTableFullName() {
-    return tableFullName;
   }
 
   @Override

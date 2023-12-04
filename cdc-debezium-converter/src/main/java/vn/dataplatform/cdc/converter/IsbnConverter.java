@@ -18,7 +18,7 @@ public class IsbnConverter implements CustomConverter<SchemaBuilder, RelationalC
     @Override
     public void converterFor(RelationalColumn field, ConverterRegistration<SchemaBuilder> registration) {
         if("isbn".equals(field.typeName())) {
-            registration.register(schemaBuilder, x -> x.toString());
+            registration.register(schemaBuilder, Object::toString);
         }
     }
 }

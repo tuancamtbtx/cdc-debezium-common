@@ -12,14 +12,12 @@
         <module>cdc-debezium-transform</module>
         <module>cdc-debezium-server</module>
         <module>cdc-core</module>
-        <module>cdc-schema-registry</module>
         <module>cdc-debezium-converter</module>
         <module>cdc-debezium-pipeline</module>
         <module>cdc-security</module>
         <module>cdc-debezium-sinks</module>
         <module>cdc-debezium-storage</module>
         <module>cdc-engine</module>
-        <module>cdc-debezium-dist</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -91,6 +89,8 @@
         <version.junit>5.10.0</version.junit>
         <!-- Json Org -->
         <version.json.org>20230618</version.json.org>
+        <version.gson>2.10.1</version.gson>
+
     </properties>
     <dependencyManagement>
         <dependencies>

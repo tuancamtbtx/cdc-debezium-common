@@ -20,3 +20,4 @@ Follow via https://debezium.io/documentation/reference/stable/operations/debeziu
 
 ### Architecture
 ![alt text](./images/cdc_debezium_server.gif)
+
