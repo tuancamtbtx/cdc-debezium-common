@@ -86,7 +86,7 @@ public abstract class AbstractChangeConsumer extends BaseChangeConsumer implemen
     public void handleBatch(List<ChangeEvent<Object, Object>> records, DebeziumEngine.RecordCommitter<ChangeEvent<Object, Object>> committer)
         throws InterruptedException {
         LOGGER.trace("Received {} events", records.size());
-
+        LOGGER.info("records: {}", records);
         Instant start = Instant.now();
         Map<String, List<DebeziumBigqueryEvent>> events = records.stream()
             .map((ChangeEvent<Object, Object> e)

@@ -99,7 +99,6 @@ public class BatchBigqueryChangeConsumer <T> extends AbstractChangeConsumer {
       Instant start = Instant.now();
       final long numRecords;
       TableId tableId = getTableId(destination);
-
       DebeziumBigqueryEvent sampleEvent = data.get(0);
       Schema schema = sampleEvent.getBigQuerySchema(false, false);
       if (schema == null) {
@@ -115,7 +114,7 @@ public class BatchBigqueryChangeConsumer <T> extends AbstractChangeConsumer {
           .setWriteDisposition(JobInfo.WriteDisposition.valueOf(writeDisposition))
           .setClustering(clustering)
           .setSchema(schema)
-          .setTimePartitioning(timePartitioning)
+//          .setTimePartitioning(timePartitioning)
           .setSchemaUpdateOptions(schemaUpdateOptions)
           .setCreateDisposition(JobInfo.CreateDisposition.valueOf(createDisposition))
           .setMaxBadRecords(0);

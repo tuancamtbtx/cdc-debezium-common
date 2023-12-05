@@ -220,8 +220,8 @@ public class StreamBQChangeConsumer extends AbstractChangeConsumer{
     StandardTableDefinition tableDefinition =
         StandardTableDefinition.newBuilder()
             .setSchema(schema)
-            .setTimePartitioning(timePartitioning)
-            .setClustering(clustering)
+//            .setTimePartitioning(timePartitioning)
+//            .setClustering(clustering)
             .setTableConstraints(tableConstraints)
             .build();
     TableInfo tableInfo =
