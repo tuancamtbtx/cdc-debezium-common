@@ -66,21 +66,21 @@ public class StreamBigqueryChangeConsumerTest extends BaseBigqueryTest{
 
     Awaitility.await().atMost(Duration.ofSeconds(1200)).until(() -> {
       try {
-        TableResult result = getTableData("testc.inventory.test_table");
+        TableResult result = getTableData("changelog.inventory.test_table");
         return result.getTotalRows() >= (long) iteration * maxBatchSize;
       } catch (Exception e) {
         return false;
       }
     });
 
-    TableResult result = getTableData("testc.inventory.test_table");
+    TableResult result = getTableData("changelog.inventory.test_table");
     System.out.println("Row Count=" + result.getTotalRows());
   }
 
   @Test
   @Disabled("WIP")
   public void testSchemaChanges() throws Exception {
-    String dest = "testc.inventory.customers";
+    String dest = "changelog.inventory.customers";
     Awaitility.await().atMost(Duration.ofSeconds(180)).until(() -> {
       try {
         TableResult tableData = getTableData(dest);

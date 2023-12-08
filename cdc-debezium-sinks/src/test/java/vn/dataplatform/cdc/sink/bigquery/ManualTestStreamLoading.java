@@ -73,6 +73,7 @@ public class ManualTestStreamLoading {
     record.put("c_date", 3);
     record.put("c_datetime", 1662805921200L);
     record.put("c_ts", 1662805921200L);
+    record.put("c_timezone", 1);
     jsonArr.put(record);
 
     ApiFuture<AppendRowsResponse> request = streamWriter.append(jsonArr);

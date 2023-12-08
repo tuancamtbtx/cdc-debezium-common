@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c439d25c-ea81-4083-b406-876afde7dcb8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/cdc-debezium-sinks/src/main/java/vn/dataplatform/cdc/sinks/bigquery/AbstractChangeConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdc-debezium-sinks/src/main/java/vn/dataplatform/cdc/sinks/bigquery/AbstractChangeConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdc-debezium-sinks/src/main/java/vn/dataplatform/cdc/sinks/bigquery/BatchBigqueryChangeConsumer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdc-debezium-sinks/src/main/java/vn/dataplatform/cdc/sinks/bigquery/StreamBQChangeConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdc-debezium-sinks/src/main/java/vn/dataplatform/cdc/sinks/bigquery/StreamBQChangeConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdc-debezium-sinks/src/test/java/vn/dataplatform/cdc/sink/bigquery/ManualTestStreamLoading.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdc-debezium-sinks/src/test/java/vn/dataplatform/cdc/sink/bigquery/ManualTestStreamLoading.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdc-debezium-sinks/src/test/java/vn/dataplatform/cdc/sink/bigquery/StreamBigqueryChangeConsumerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdc-debezium-sinks/src/test/java/vn/dataplatform/cdc/sink/bigquery/StreamBigqueryChangeConsumerTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/com/google/cloud/google-cloud-bigquery/2.29.0/google-cloud-bigquery-2.29.0.jar!/com/google/cloud/bigquery/StandardTableDefinition.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/io/debezium/debezium-core/2.3.0.Final/debezium-core-2.3.0.Final.jar!/io/debezium/transforms/ExtractNewRecordState.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/io/debezium/debezium-core/2.3.0.Final/debezium-core-2.3.0.Final.jar!/io/debezium/transforms/SmtManager.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/io/debezium/debezium-server-core/2.3.0.Final/debezium-server-core-2.3.0.Final.jar!/io/debezium/server/DebeziumServer.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/Library/Java/JavaVirtualMachines/corretto-11.0.19/Contents/Home/lib/src.zip!/java.base/java/util/HashSet.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2V15d6sNE7cfVaCPTwMv1k9b0ho" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ACTIVE_CLOUD_PROJECT_ACCOUNT": "tuan.nguyen3@trustingsocial.com",
+    "ACTIVE_CLOUD_PROJECT_ID": "data-engineering-230006",
+    "ACTIVE_CLOUD_PROJECT_NAME": "Data Engineering",
+    "ACTIVE_CLOUD_PROJECT_NUMBER": "535432534239",
+    "OverrideImplement.generate.javadoc": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.google.cloudcode.ide_session_index": "20231208_0000",
+    "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "11",
+    "last_opened_file_path": "/Users/tuan.nguyen3/Documents/Personal-Projects/cdc-debezium-common/cdc-debezium-sinks/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "bigquery"
+    ]
+  }
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cdc-debezium-sinks/src/main/resources" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/cdc-debezium-server/src/test/resources" />
+      <recent name="$PROJECT_DIR$/cdc-debezium-server/src/main/resources" />
+      <recent name="$PROJECT_DIR$/cdc-debezium-server/src/main/resources/META-INF.services" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/resources" />
+      <recent name="$PROJECT_DIR$/cdc-debezium-transform/src/test" />
+      <recent name="$PROJECT_DIR$/conf" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="vn.dataplatform.cdc.transform" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Quarkus.cdc-debezium-server">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="NimRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="nim.task.build.to.cache" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ManualTestStreamLoading" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="vn.dataplatform.cdc.sink.bigquery.ManualTestStreamLoading" />
+      <module name="cdc-debezium-sinks" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="vn.dataplatform.cdc.sink.bigquery.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StreamBigqueryChangeConsumerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdc-debezium-sinks" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="vn.dataplatform.cdc.sink.bigquery.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <option name="PACKAGE_NAME" value="vn.dataplatform.cdc.sink.bigquery" />
+      <option name="MAIN_CLASS_NAME" value="vn.dataplatform.cdc.sink.bigquery.StreamBigqueryChangeConsumerTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StreamBigqueryChangeConsumerTest.testPerformance" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdc-debezium-sinks" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="vn.dataplatform.cdc.sink.bigquery.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="vn.dataplatform.cdc.sink.bigquery" />
+      <option name="MAIN_CLASS_NAME" value="vn.dataplatform.cdc.sink.bigquery.StreamBigqueryChangeConsumerTest" />
+      <option name="METHOD_NAME" value="testPerformance" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StreamBigqueryChangeConsumerTest.testSchemaChanges" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdc-debezium-sinks" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="vn.dataplatform.cdc.sink.bigquery.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="vn.dataplatform.cdc.sink.bigquery" />
+      <option name="MAIN_CLASS_NAME" value="vn.dataplatform.cdc.sink.bigquery.StreamBigqueryChangeConsumerTest" />
+      <option name="METHOD_NAME" value="testSchemaChanges" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestTextCryptoTransform" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdc-debezium-transform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="vn.dataplatform.cdc.transform.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="vn.dataplatform.cdc.transform" />
+      <option name="MAIN_CLASS_NAME" value="vn.dataplatform.cdc.transform.TestTextCryptoTransform" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cdc-debezium-server" type="QuarkusRunConfigurationType" factoryName="Quarkus">
+      <module name="cdc-debezium-server" />
+      <QsMavenRunConfiguration>
+        <MavenSettings>
+          <option name="myGeneralSettings" />
+          <option name="myRunnerSettings" />
+          <option name="myRunnerParameters">
+            <MavenRunnerParameters>
+              <option name="cmdOptions" value="" />
+              <option name="profiles">
+                <set />
+              </option>
+              <option name="goals">
+                <list>
+                  <option value="quarkus:dev" />
+                </list>
+              </option>
+              <option name="pomFileName" value="pom.xml" />
+              <option name="profilesMap">
+                <map />
+              </option>
+              <option name="projectsCmdOptionValues">
+                <list />
+              </option>
+              <option name="resolveToWorkspace" value="false" />
+              <option name="workingDirPath" value="$PROJECT_DIR$/cdc-debezium-server" />
+            </MavenRunnerParameters>
+          </option>
+        </MavenSettings>
+        <targetMavenLocalRepo />
+        <emulateTerminal>true</emulateTerminal>
+      </QsMavenRunConfiguration>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cdc-transform (1)" type="QuarkusRunConfigurationType" factoryName="Quarkus">
+      <module name="cdc-debezium-transform" />
+      <QsMavenRunConfiguration>
+        <MavenSettings>
+          <option name="myGeneralSettings" />
+          <option name="myRunnerSettings" />
+          <option name="myRunnerParameters">
+            <MavenRunnerParameters>
+              <option name="cmdOptions" />
+              <option name="profiles">
+                <set />
+              </option>
+              <option name="goals">
+                <list />
+              </option>
+              <option name="pomFileName" value="pom.xml" />
+              <option name="profilesMap">
+                <map />
+              </option>
+              <option name="projectsCmdOptionValues">
+                <list />
+              </option>
+              <option name="resolveToWorkspace" value="false" />
+              <option name="workingDirPath" value="$PROJECT_DIR$/cdc-debezium-transform" />
+            </MavenRunnerParameters>
+          </option>
+        </MavenSettings>
+        <targetMavenLocalRepo />
+        <emulateTerminal>true</emulateTerminal>
+      </QsMavenRunConfiguration>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cdc-transform" type="QuarkusRunConfigurationType" factoryName="Quarkus">
+      <module name="cdc-debezium-transform" />
+      <QsMavenRunConfiguration>
+        <MavenSettings>
+          <option name="myGeneralSettings" />
+          <option name="myRunnerSettings" />
+          <option name="myRunnerParameters">
+            <MavenRunnerParameters>
+              <option name="cmdOptions" />
+              <option name="profiles">
+                <set />
+              </option>
+              <option name="goals">
+                <list>
+                  <option value="quarkus:dev" />
+                </list>
+              </option>
+              <option name="pomFileName" value="pom.xml" />
+              <option name="profilesMap">
+                <map />
+              </option>
+              <option name="projectsCmdOptionValues">
+                <list />
+              </option>
+              <option name="resolveToWorkspace" value="false" />
+              <option name="workingDirPath" value="$PROJECT_DIR$/cdc-debezium-transform" />
+            </MavenRunnerParameters>
+          </option>
+        </MavenSettings>
+        <targetMavenLocalRepo />
+        <emulateTerminal>true</emulateTerminal>
+      </QsMavenRunConfiguration>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.ManualTestStreamLoading" />
+      <item itemvalue="JUnit.StreamBigqueryChangeConsumerTest" />
+      <item itemvalue="JUnit.StreamBigqueryChangeConsumerTest.testPerformance" />
+      <item itemvalue="JUnit.StreamBigqueryChangeConsumerTest.testSchemaChanges" />
+      <item itemvalue="JUnit.TestTextCryptoTransform" />
+      <item itemvalue="Quarkus.cdc-debezium-server" />
+      <item itemvalue="Quarkus.cdc-transform" />
+      <item itemvalue="Quarkus.cdc-transform (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.StreamBigqueryChangeConsumerTest.testSchemaChanges" />
+        <item itemvalue="JUnit.StreamBigqueryChangeConsumerTest" />
+        <item itemvalue="Application.ManualTestStreamLoading" />
+        <item itemvalue="JUnit.StreamBigqueryChangeConsumerTest.testPerformance" />
+        <item itemvalue="JUnit.TestTextCryptoTransform" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c439d25c-ea81-4083-b406-876afde7dcb8" name="Default Changelist" comment="" />
+      <created>1693990832238</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1693990832238</updated>
+      <workItem from="1693990834139" duration="4171000" />
+      <workItem from="1694071679338" duration="2145000" />
+      <workItem from="1694073861418" duration="43560000" />
+      <workItem from="1694315387964" duration="11672000" />
+      <workItem from="1694401343773" duration="21260000" />
+      <workItem from="1694487081221" duration="74304000" />
+      <workItem from="1695371107138" duration="5465000" />
+      <workItem from="1696076603712" duration="2126000" />
+      <workItem from="1697712683212" duration="3853000" />
+      <workItem from="1698719691524" duration="14644000" />
+      <workItem from="1698761725959" duration="317000" />
+      <workItem from="1698762062137" duration="24000" />
+      <workItem from="1698762094715" duration="8160000" />
+      <workItem from="1698830590886" duration="1537000" />
+      <workItem from="1698835887219" duration="34696000" />
+      <workItem from="1701329797495" duration="19932000" />
+      <workItem from="1701425905795" duration="13890000" />
+      <workItem from="1701664880929" duration="24276000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.lang.RuntimeException" memberName="cause" />
+        <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="key" />
+        <PinnedItemInfo parentTag="java.util.LinkedHashMap$Entry" memberName="value" />
+        <PinnedItemInfo parentTag="io.debezium.embedded.Transformations" memberName="predicates" />
+        <PinnedItemInfo parentTag="org.apache.kafka.connect.data.Struct" memberName="schema" />
+        <PinnedItemInfo parentTag="org.apache.kafka.connect.data.Struct" memberName="values" />
+        <PinnedItemInfo parentTag="org.apache.kafka.connect.source.SourceRecord" memberName="value" />
+        <PinnedItemInfo parentTag="vn.dataplatform.cdc.sinks.bigquery.DebeziumBigqueryEvent" memberName="value" />
+        <PinnedItemInfo parentTag="java.lang.NullPointerException" memberName="cause" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/cdc-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-converter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-converter/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-dist/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-dist/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-pipeline/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-pipeline/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-sinks/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-sinks/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-storage/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-storage/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-transform/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-debezium-transform/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-engine/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-engine/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-schema-registry/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-schema-registry/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdc-security/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

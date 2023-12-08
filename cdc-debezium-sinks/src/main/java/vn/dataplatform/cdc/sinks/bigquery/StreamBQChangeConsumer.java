@@ -1,7 +1,7 @@
 package vn.dataplatform.cdc.sinks.bigquery;
 
+import com.google.cloud.bigquery.StandardTableDefinition.Builder;
 import io.debezium.DebeziumException;
-import io.debezium.engine.ChangeEvent;
 import io.grpc.Status;
 import io.grpc.Status.Code;
 
@@ -19,7 +19,6 @@ import com.google.api.core.ApiFuture;
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.cloud.bigquery.*;
 import com.google.cloud.bigquery.storage.v1.*;
-import com.google.common.annotations.Beta;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.protobuf.Descriptors.DescriptorValidationException;
@@ -87,7 +86,7 @@ public class StreamBQChangeConsumer extends AbstractChangeConsumer{
 
   @PostConstruct
   void connect() throws InterruptedException {
-    this.initizalize();
+    this.initialize();
   }
 
   @PreDestroy
@@ -102,8 +101,8 @@ public class StreamBQChangeConsumer extends AbstractChangeConsumer{
     }
   }
 
-  public void initizalize() throws InterruptedException {
-    super.initizalize();
+  public void initialize() throws InterruptedException {
+    super.initialize();
 
     bqClient = BatchUtil.getBQClient(gcpProject, bqDataset, credentialsFile, bqLocation);
 
@@ -215,15 +214,19 @@ public class StreamBQChangeConsumer extends AbstractChangeConsumer{
 
 
   private Table createTable(TableId tableId, Schema schema, Clustering clustering, TableConstraints tableConstraints) {
-
     LOGGER.info("createTableSchema: {} - timePartitioning: {}", schema.getFields(), timePartitioning.getField());
-    StandardTableDefinition tableDefinition =
-        StandardTableDefinition.newBuilder()
-            .setSchema(schema)
-//            .setTimePartitioning(timePartitioning)
-//            .setClustering(clustering)
-            .setTableConstraints(tableConstraints)
-            .build();
+    Builder tableDefinitionBuilder = StandardTableDefinition.newBuilder();
+    tableDefinitionBuilder.setSchema(schema);
+    if (clustering != null) {
+      tableDefinitionBuilder.setClustering(clustering);
+    }
+    if(tableConstraints != null) {
+      tableDefinitionBuilder.setTableConstraints(tableConstraints);
+    }
+    if(timePartitioning != null) {
+      tableDefinitionBuilder.setTimePartitioning(timePartitioning);
+    }
+    StandardTableDefinition tableDefinition = tableDefinitionBuilder.build();
     TableInfo tableInfo =
         TableInfo.newBuilder(tableId, tableDefinition).build();
     Table table = bqClient.create(tableInfo);

@@ -61,7 +61,7 @@ public abstract class AbstractChangeConsumer extends BaseChangeConsumer implemen
     Instance<InterfaceBatchSizeWait> batchSizeWaitInstances;
     InterfaceBatchSizeWait batchSizeWait;
 
-    public void initizalize() throws InterruptedException {
+    public void initialize() throws InterruptedException {
         // configure and set
         valSerde.configure(Collections.emptyMap(), false);
         valDeserializer = valSerde.deserializer();
@@ -86,7 +86,7 @@ public abstract class AbstractChangeConsumer extends BaseChangeConsumer implemen
     public void handleBatch(List<ChangeEvent<Object, Object>> records, DebeziumEngine.RecordCommitter<ChangeEvent<Object, Object>> committer)
         throws InterruptedException {
         LOGGER.trace("Received {} events", records.size());
-        LOGGER.info("records: {}", records);
+        LOGGER.info("records: {}", records.get(0));
         Instant start = Instant.now();
         Map<String, List<DebeziumBigqueryEvent>> events = records.stream()
             .map((ChangeEvent<Object, Object> e)
