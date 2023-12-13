@@ -87,27 +87,27 @@ public abstract class AbstractTransform<R extends ConnectRecord<R>> implements T
 
     protected Map<String, Object> processDataNestedWithSchemaless(String field, Map<String, Object> updatedValue, String providerClass) {
         Optional<String> rootField = TransformUtils.getRootField(field);
-        if (rootField.isPresent()) {
-            Optional<String> pathChildField = TransformUtils.getPathChildField(field);
-            if (pathChildField.isPresent()) {
-                Object rootValue = updatedValue.get(rootField.get().trim());
-                Optional<Object> valueNeedEncrypt = TransformUtils.getValueFromJsonObject(rootValue, pathChildField.get());
-                try {
-                    if (valueNeedEncrypt.isPresent()) {
-                        Object encrypted = this.encryptByDataType(providerClass, valueNeedEncrypt.get());
-                        if (rootValue instanceof String) {
-                            String encryptedStr = JsonPath.parse(rootValue.toString()).set(pathChildField.get(), encrypted).jsonString();
-                            updatedValue.put(rootField.get(), encryptedStr);
-                        } else {
-                            JsonPath.parse(rootValue).set(pathChildField.get(), encrypted);
-                        }
-                    }
-                } catch (Exception ex) {
-                    log.error(ex.getMessage(), ex);
+        if (rootField.isEmpty()) {
+            return updatedValue;
+        }
+        Optional<String> pathChildField = TransformUtils.getPathChildField(field);
+        if (pathChildField.isEmpty()) {
+            return updatedValue;
+        }
+        Object rootValue = updatedValue.get(rootField.get().trim());
+        Optional<Object> valueNeedEncrypt = TransformUtils.getValueFromJsonObject(rootValue, pathChildField.get());
+        try {
+            if (valueNeedEncrypt.isPresent()) {
+                Object encrypted = this.encryptByDataType(providerClass, valueNeedEncrypt.get());
+                if (rootValue instanceof String) {
+                    String encryptedStr = JsonPath.parse(rootValue.toString()).set(pathChildField.get(), encrypted).jsonString();
+                    updatedValue.put(rootField.get(), encryptedStr);
+                } else {
+                    JsonPath.parse(rootValue).set(pathChildField.get(), encrypted);
                 }
-            } else {
-                log.info("path child field is empty");
             }
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
         }
         return updatedValue;
     }

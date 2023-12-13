@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c439d25c-ea81-4083-b406-876afde7dcb8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/cdc-debezium-sinks/src/main/java/vn/dataplatform/cdc/sinks/bigquery/AbstractChangeConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdc-debezium-sinks/src/main/java/vn/dataplatform/cdc/sinks/bigquery/AbstractChangeConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdc-debezium-sinks/src/main/java/vn/dataplatform/cdc/sinks/bigquery/BatchBigqueryChangeConsumer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdc-debezium-sinks/src/main/java/vn/dataplatform/cdc/sinks/bigquery/StreamBQChangeConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdc-debezium-sinks/src/main/java/vn/dataplatform/cdc/sinks/bigquery/StreamBQChangeConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdc-debezium-sinks/src/test/java/vn/dataplatform/cdc/sink/bigquery/ManualTestStreamLoading.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdc-debezium-sinks/src/test/java/vn/dataplatform/cdc/sink/bigquery/ManualTestStreamLoading.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdc-debezium-sinks/src/test/java/vn/dataplatform/cdc/sink/bigquery/StreamBigqueryChangeConsumerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdc-debezium-sinks/src/test/java/vn/dataplatform/cdc/sink/bigquery/StreamBigqueryChangeConsumerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdc-debezium-transform/src/main/java/vn/dataplatform/cdc/transform/AbstractTransform.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdc-debezium-transform/src/main/java/vn/dataplatform/cdc/transform/AbstractTransform.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +57,7 @@
     "ACTIVE_CLOUD_PROJECT_NUMBER": "535432534239",
     "OverrideImplement.generate.javadoc": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20231208_0000",
+    "com.google.cloudcode.ide_session_index": "20231213_0003",
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "11",
     "last_opened_file_path": "/Users/tuan.nguyen3/Documents/Personal-Projects/cdc-debezium-common/cdc-debezium-sinks/src/main/resources",
@@ -72,7 +69,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -101,7 +98,7 @@
       <recent name="vn.dataplatform.cdc.transform" />
     </key>
   </component>
-  <component name="RunManager" selected="Quarkus.cdc-debezium-server">
+  <component name="RunManager" selected="JUnit.StreamBigqueryChangeConsumerTest">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -322,8 +319,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.StreamBigqueryChangeConsumerTest.testSchemaChanges" />
         <item itemvalue="JUnit.StreamBigqueryChangeConsumerTest" />
+        <item itemvalue="JUnit.StreamBigqueryChangeConsumerTest.testSchemaChanges" />
         <item itemvalue="Application.ManualTestStreamLoading" />
         <item itemvalue="JUnit.StreamBigqueryChangeConsumerTest.testPerformance" />
         <item itemvalue="JUnit.TestTextCryptoTransform" />
@@ -355,7 +352,9 @@
       <workItem from="1698835887219" duration="34696000" />
       <workItem from="1701329797495" duration="19932000" />
       <workItem from="1701425905795" duration="13890000" />
-      <workItem from="1701664880929" duration="24276000" />
+      <workItem from="1701664880929" duration="25487000" />
+      <workItem from="1702435168630" duration="4603000" />
+      <workItem from="1702455430804" duration="146000" />
     </task>
     <servers />
   </component>
