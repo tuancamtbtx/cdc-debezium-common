@@ -1,5 +1,6 @@
 package vn.dataplatform.security.loader;
 
+import lombok.NonNull;
 import vn.dataplatform.security.utils.ServiceLoaderUtils;
 
 import java.util.List;
@@ -32,10 +33,7 @@ public class GenericServiceLoader<T> {
      *
      * @return the first available implementation of the service interface
      */
-    public T getInstance(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("name class cannot be null");
-        }
+    public T getInstance(@NonNull String name) {
         List<T> providersList = ServiceLoaderUtils.findServiceProviders(clazz);
         return providersList.stream().filter(provider -> name.equals(provider.getClass().getName())).findFirst().orElseThrow(RuntimeException::new);
     }
@@ -45,10 +43,7 @@ public class GenericServiceLoader<T> {
      *
      * @return the first available implementation of the service interface
      */
-    public T getInstance(Class<T> clazz) {
-        if (clazz == null) {
-            throw new IllegalArgumentException("class cannot be null");
-        }
+    public T getInstance(@NonNull Class<T> clazz) {
         List<T> providersList = ServiceLoaderUtils.findServiceProviders(clazz);
         return providersList.stream().filter(provider -> clazz.equals(provider.getClass())).findFirst().orElseThrow(RuntimeException::new);
     }
