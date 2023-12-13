@@ -24,7 +24,6 @@
         <module>cdc-security</module>
         <module>cdc-debezium-sinks</module>
         <module>cdc-debezium-storage</module>
-        <module>cdc-engine</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -131,7 +130,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <dependency>
                 <groupId>io.debezium</groupId>
                 <artifactId>debezium-bom</artifactId>
@@ -139,7 +137,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <dependency>
                 <groupId>io.debezium</groupId>
                 <artifactId>debezium-server-bom</artifactId>
@@ -147,7 +144,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <!-- Quarkus dependencies -->
             <dependency>
                 <groupId>io.quarkus</groupId>
@@ -244,7 +240,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
