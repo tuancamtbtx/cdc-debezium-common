@@ -73,9 +73,7 @@ public abstract class AbstractChangeConsumer extends BaseChangeConsumer implemen
             throw new InterruptedException("debezium.format.value={" + valueFormat + "} not supported! Supported (debezium.format.value=*) formats are {json,}!");
         }
 
-        if (!keyFormat.equalsIgnoreCase(Json.class.getSimpleName().toLowerCase())) {
-            throw new InterruptedException("debezium.format.key={" + valueFormat + "} not supported! Supported (debezium.format.key=*) formats are {json,}!");
-        }
+
 
         batchSizeWait = BatchUtil.selectInstance(batchSizeWaitInstances, batchSizeWaitName);
         LOGGER.info("Using {} to optimize batch size", batchSizeWait.getClass().getSimpleName());
@@ -92,7 +90,8 @@ public abstract class AbstractChangeConsumer extends BaseChangeConsumer implemen
             .map((ChangeEvent<Object, Object> e)
                 -> {
                 try {
-                    return new DebeziumBigqueryEvent(e.destination(),
+                    return new DebeziumBigqueryEvent(
+                            e.destination(),
                         valDeserializer.deserialize(e.destination(), getBytes(e.value())),
                         e.key() == null ? null : keyDeserializer.deserialize(e.destination(), getBytes(e.key())),
                         mapper.readTree(getBytes(e.value())).get("schema"),

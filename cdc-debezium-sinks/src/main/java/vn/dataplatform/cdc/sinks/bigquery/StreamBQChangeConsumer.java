@@ -214,7 +214,6 @@ public class StreamBQChangeConsumer extends AbstractChangeConsumer{
 
 
   private Table createTable(TableId tableId, Schema schema, Clustering clustering, TableConstraints tableConstraints) {
-    LOGGER.info("createTableSchema: {} - timePartitioning: {}", schema.getFields(), timePartitioning.getField());
     Builder tableDefinitionBuilder = StandardTableDefinition.newBuilder();
     tableDefinitionBuilder.setSchema(schema);
     if (clustering != null) {
